@@ -6,6 +6,7 @@ const wordlist = [
   "تبریز",
   "تهران",
   "شیراز",
+  "الاله",
 ];
 
 export default wordlist;

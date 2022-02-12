@@ -1,7 +1,10 @@
 import wordlist from "./words.js";
-const word = wordlist[Math.floor(Math.random() * wordlist.length)];
+
+// const word = wordlist[Math.floor(Math.random() * wordlist.length)];
+const word = wordlist[7];
+console.log(word);
 const wordch = word.split("");
-const keyselect = document.querySelectorAll(".key:not(.del)");
+const key = document.querySelectorAll(".key:not(.del)");
 const del = document.querySelector(".del");
 const newgame = document.querySelector(".newgame");
 const buttonclick = document.querySelector("button");
@@ -17,21 +20,6 @@ info.addEventListener("click", () => {
   let greyout = document.querySelector(".container");
   greyout.classList.toggle("pagegray");
 });
-//
-/*  const aaa = document.querySelector("div");
-  if (aaa.classList[1] == "pagegray") {
-    console.log(true);
-    document.body.addEventListener(
-      "click",
-      () => {
-        let greyout = document.querySelector("div");
-        greyout.classList.remove("pagegray");
-      },
-      true
-    );
-  }
-*/
-//
 // delete charachters
 del.addEventListener("click", () => {
   if (activecell === 0) {
@@ -43,27 +31,9 @@ del.addEventListener("click", () => {
 });
 // Start new game
 newgame.addEventListener("click", () => {
-  // window.location.reload();
-  activecell = 0;
-  rownum = 0;
-  let cells = document.querySelectorAll(".cell");
-  cells.forEach((cell) => {
-    cell.textContent = "";
-    cell.classList.remove("green", "yellow", "gray");
-  });
+  window.location.reload();
 });
-// keyboard keys
-keyselect.forEach((item) => {
-  item.addEventListener("click", () => {
-    let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
-    if (activecell < 5 && cell[activecell].textContent === "") {
-      cell[activecell].textContent = item.textContent;
-      activecell = activecell + 1;
-    }
-    const status = document.querySelector(".status");
-    status.textContent = "";
-  });
-});
+
 // submit word
 buttonclick.addEventListener("click", () => {
   let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
@@ -80,20 +50,51 @@ buttonclick.addEventListener("click", () => {
   }
 });
 // Checking all characters function
+
 function checkword() {
-  for (let f = 0; f < word.length; f++) {
-    let letters = document.querySelectorAll(`${activerow[rownum]}>.cell`);
+  const ccc = [];
+  for (let f = 0; f < 5; f++) {
+    const letters = document.querySelectorAll(`${activerow[rownum]}>.cell`);
     if (wordch[f] === letters[f].textContent) {
       letters[f].classList.add("green");
-    } else if (wordch.includes(letters[f].textContent)) {
-      letters[f].classList.add("yellow");
-    } else {
-      letters[f].classList.add("gray");
+      ccc.push(f);
     }
   }
-  keyselect.forEach((item) => {
-    item.classList.remove("keyselect");
-  });
+  console.log(ccc);
+  let www = wordch;
+  for (let p = 0; p < ccc.length; ++p) {
+    const index = www.indexOf(wordch[ccc[p] - p]);
+    if (index > -1) {
+      www.splice(index, 1);
+    }
+  }
+  console.log(www);
+  let qqq = 0;
+  let rrr = 0;
+  for (let f = 0; f < 5; f++) {
+    if (f === ccc[rrr]) {
+      ++rrr;
+    } else {
+      const letters = document.querySelectorAll(
+        `${activerow[rownum]}>.cell:not(.green)`
+      );
+      if (www.includes(letters[qqq].textContent)) {
+        letters[qqq].classList.add("yellow");
+        ++qqq;
+      } else {
+        letters[qqq].classList.add("gray");
+        ++qqq;
+      }
+    }
+  }
+
+  // if (wordch[f] === letters[f].textContent) {
+  //   letters[f].classList.add("green");
+  // } else if (wordch.includes(letters[f].textContent)) {
+  //   letters[f].classList.add("yellow");
+  // } else {
+  //   letters[f].classList.add("gray");
+  // }
   let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
   if (
     cell[0].classList.contains("green") &&
@@ -106,7 +107,7 @@ function checkword() {
   }
 
   activecell = 0;
-  rownum = rownum + 1;
+  ++rownum;
 }
 // winning fucntion
 function won() {
@@ -120,3 +121,17 @@ function lowletter() {
   status.textContent = ".تعداد حروف کافی نمی‌باشد";
   status.classList.add("redtext");
 }
+// keyboard keys
+key.forEach((item) => {
+  item.addEventListener("click", () => {
+    const status = document.querySelector(".status");
+    if (status.classList.contains("greentext") === false) {
+      let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
+      if (activecell < 5 && cell[activecell].textContent === "") {
+        cell[activecell].textContent = item.textContent;
+        activecell = activecell + 1;
+      }
+    }
+    status.textContent = "";
+  });
+});
