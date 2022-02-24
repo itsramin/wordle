@@ -66,6 +66,10 @@ function checkword() {
       setTimeout(won, 10);
     } else {
       rownum++;
+      if (rownum === 5) {
+        status.textContent = `کلمه مورد نظر ${word} بود.`;
+        winnertrue = true;
+      }
       activecell = 0;
     }
   } else {
