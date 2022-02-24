@@ -1,8 +1,11 @@
 import wordlist from "./words.js";
 
 let word = wordlist[Math.floor(Math.random() * wordlist.length)];
-console.log(word);
 let wordch = word.split("");
+let winnertrue = false;
+let cellcombine = "";
+let activecell = 0;
+let rownum = 0;
 const key = document.querySelectorAll(".key:not(.del)");
 const del = document.querySelector(".del");
 const newgame = document.querySelector(".newgame");
@@ -11,13 +14,10 @@ const info = document.querySelector(".info");
 const overlay = document.querySelector(".overlay");
 const closeinfo = document.querySelector(".closeinfo");
 const infopage = document.querySelector(".infopage");
-let activecell = 0;
-let rownum = 0;
 const activerow = [".row1", ".row2", ".row3", ".row4", ".row5"];
 const status = document.querySelector(".status");
-let winnertrue = false;
-let cellcombine = "";
 
+// checking the word is correct or not
 function checkword() {
   if (wordlist.includes(cellcombine)) {
     wordch = word.split("");
@@ -54,14 +54,6 @@ function checkword() {
       } else {
         cells[otherch].classList.add("gray");
       }
-
-      // else if (wordch.includes(cells[otherch].textContent)) {
-      //   cells[otherch].classList.add("yellow");
-      // let wordchRev = wordch.reverse();
-      // wordch[wordchRev.indexOf(cells[otherch].textContent)] = "x";
-      // else {
-      //   cells[otherch].classList.add("gray");
-      // }
     }
     if (
       cells[0].classList.contains("green") &&
@@ -92,12 +84,12 @@ function lowletter() {
   status.classList.add("redtext");
 }
 
-// showing information --ok
+// showing information
 info.addEventListener("click", function () {
   infopage.classList.remove("hidden");
   overlay.classList.remove("hidden");
 });
-// delete charachters --ok
+// delete charachters
 del.addEventListener("click", function () {
   if (activecell !== 0 && winnertrue === false) {
     let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
@@ -108,7 +100,6 @@ del.addEventListener("click", function () {
 });
 // Start new game
 newgame.addEventListener("click", function () {
-  // window.location.reload();
   word = wordlist[Math.floor(Math.random() * wordlist.length)];
   wordch = word.split("");
   let cells = document.querySelectorAll(".cell");
@@ -142,8 +133,7 @@ sub.addEventListener("click", function () {
     }
   }
 });
-
-// keyboard keys --ok
+// keyboard keys
 key.forEach((item) => {
   item.addEventListener("click", function () {
     if (winnertrue === false) {
@@ -164,7 +154,7 @@ key.forEach((item) => {
     }
   });
 });
-// close info page --ok
+// close info page
 closeinfo.addEventListener("click", function () {
   infopage.classList.add("hidden");
   overlay.classList.add("hidden");
