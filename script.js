@@ -1,117 +1,87 @@
 import wordlist from "./words.js";
 
-// const word = wordlist[Math.floor(Math.random() * wordlist.length)];
-const word = wordlist[7];
+let word = wordlist[Math.floor(Math.random() * wordlist.length)];
 console.log(word);
-const wordch = word.split("");
+let wordch = word.split("");
 const key = document.querySelectorAll(".key:not(.del)");
 const del = document.querySelector(".del");
 const newgame = document.querySelector(".newgame");
-const buttonclick = document.querySelector("button");
+const sub = document.querySelector(".sub");
 const info = document.querySelector(".info");
-var activecell = 0;
-var rownum = 0;
+const overlay = document.querySelector(".overlay");
+const closeinfo = document.querySelector(".closeinfo");
+const infopage = document.querySelector(".infopage");
+let activecell = 0;
+let rownum = 0;
 const activerow = [".row1", ".row2", ".row3", ".row4", ".row5"];
-
-// showing information
-info.addEventListener("click", () => {
-  const infoimg = document.querySelector(".infoimg");
-  infoimg.classList.toggle("show");
-  let greyout = document.querySelector(".container");
-  greyout.classList.toggle("pagegray");
-});
-// delete charachters
-del.addEventListener("click", () => {
-  if (activecell === 0) {
-  } else {
-    let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
-    cell[activecell - 1].textContent = "";
-    activecell = activecell - 1;
-  }
-});
-// Start new game
-newgame.addEventListener("click", () => {
-  window.location.reload();
-});
-
-// submit word
-buttonclick.addEventListener("click", () => {
-  let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
-  if (
-    cell[0].textContent === "" ||
-    cell[1].textContent === "" ||
-    cell[2].textContent === "" ||
-    cell[3].textContent === "" ||
-    cell[4].textContent === ""
-  ) {
-    lowletter();
-  } else {
-    checkword();
-  }
-});
-// Checking all characters function
+const status = document.querySelector(".status");
+let winnertrue = false;
+let cellcombine = "";
 
 function checkword() {
-  const ccc = [];
-  for (let f = 0; f < 5; f++) {
-    const letters = document.querySelectorAll(`${activerow[rownum]}>.cell`);
-    if (wordch[f] === letters[f].textContent) {
-      letters[f].classList.add("green");
-      ccc.push(f);
-    }
-  }
-  console.log(ccc);
-  let www = wordch;
-  for (let p = 0; p < ccc.length; ++p) {
-    const index = www.indexOf(wordch[ccc[p] - p]);
-    if (index > -1) {
-      www.splice(index, 1);
-    }
-  }
-  console.log(www);
-  let qqq = 0;
-  let rrr = 0;
-  for (let f = 0; f < 5; f++) {
-    if (f === ccc[rrr]) {
-      ++rrr;
-    } else {
-      const letters = document.querySelectorAll(
-        `${activerow[rownum]}>.cell:not(.green)`
-      );
-      if (www.includes(letters[qqq].textContent)) {
-        letters[qqq].classList.add("yellow");
-        ++qqq;
-      } else {
-        letters[qqq].classList.add("gray");
-        ++qqq;
+  if (wordlist.includes(cellcombine)) {
+    wordch = word.split("");
+    let cells = document.querySelectorAll(`${activerow[rownum]}>.cell`);
+    for (let ch = 0; ch < cells.length; ch++) {
+      if (wordch[ch] === cells[ch].textContent) {
+        cells[ch].classList.add("green");
+        wordch[ch] = "x";
       }
     }
-  }
+    for (let otherch = 0; otherch < cells.length; otherch++) {
+      if (wordch[otherch] === "x") {
+        continue;
+      } else if (cells[otherch].textContent === wordch[0]) {
+        cells[otherch].classList.add("yellow");
+        wordch[0] = "y";
+        continue;
+      } else if (cells[otherch].textContent === wordch[1]) {
+        cells[otherch].classList.add("yellow");
+        wordch[1] = "y";
+        continue;
+      } else if (cells[otherch].textContent === wordch[2]) {
+        cells[otherch].classList.add("yellow");
+        wordch[2] = "y";
+        continue;
+      } else if (cells[otherch].textContent === wordch[3]) {
+        cells[otherch].classList.add("yellow");
+        wordch[3] = "y";
+        continue;
+      } else if (cells[otherch].textContent === wordch[4]) {
+        cells[otherch].classList.add("yellow");
+        wordch[4] = "y";
+        continue;
+      } else {
+        cells[otherch].classList.add("gray");
+      }
 
-  // if (wordch[f] === letters[f].textContent) {
-  //   letters[f].classList.add("green");
-  // } else if (wordch.includes(letters[f].textContent)) {
-  //   letters[f].classList.add("yellow");
-  // } else {
-  //   letters[f].classList.add("gray");
-  // }
-  let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
-  if (
-    cell[0].classList.contains("green") &&
-    cell[1].classList.contains("green") &&
-    cell[2].classList.contains("green") &&
-    cell[3].classList.contains("green") &&
-    cell[4].classList.contains("green")
-  ) {
-    won();
+      // else if (wordch.includes(cells[otherch].textContent)) {
+      //   cells[otherch].classList.add("yellow");
+      // let wordchRev = wordch.reverse();
+      // wordch[wordchRev.indexOf(cells[otherch].textContent)] = "x";
+      // else {
+      //   cells[otherch].classList.add("gray");
+      // }
+    }
+    if (
+      cells[0].classList.contains("green") &&
+      cells[1].classList.contains("green") &&
+      cells[2].classList.contains("green") &&
+      cells[3].classList.contains("green") &&
+      cells[4].classList.contains("green")
+    ) {
+      winnertrue = true;
+      setTimeout(won, 10);
+    } else {
+      rownum++;
+      activecell = 0;
+    }
+  } else {
+    status.textContent = `.این کلمه در دیتابیس موجود نمی‌باشد`;
   }
-
-  activecell = 0;
-  ++rownum;
 }
 // winning fucntion
 function won() {
-  const status = document.querySelector(".status");
   status.textContent = "!شما برنده شدید";
   status.classList.add("greentext");
 }
@@ -121,17 +91,81 @@ function lowletter() {
   status.textContent = ".تعداد حروف کافی نمی‌باشد";
   status.classList.add("redtext");
 }
-// keyboard keys
-key.forEach((item) => {
-  item.addEventListener("click", () => {
-    const status = document.querySelector(".status");
-    if (status.classList.contains("greentext") === false) {
-      let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
-      if (activecell < 5 && cell[activecell].textContent === "") {
-        cell[activecell].textContent = item.textContent;
-        activecell = activecell + 1;
-      }
-    }
+
+// showing information --ok
+info.addEventListener("click", function () {
+  infopage.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+});
+// delete charachters --ok
+del.addEventListener("click", function () {
+  if (activecell !== 0 && winnertrue === false) {
+    let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
+    cell[activecell - 1].textContent = "";
+    activecell--;
     status.textContent = "";
+  }
+});
+// Start new game
+newgame.addEventListener("click", function () {
+  // window.location.reload();
+  word = wordlist[Math.floor(Math.random() * wordlist.length)];
+  wordch = word.split("");
+  let cells = document.querySelectorAll(".cell");
+  for (let kkk of cells) {
+    kkk.classList.remove("green");
+    kkk.classList.remove("yellow");
+    kkk.classList.remove("gray");
+    kkk.textContent = "";
+  }
+  winnertrue = false;
+  activecell = 0;
+  rownum = 0;
+  cellcombine = "";
+  status.classList.remove("greentext");
+  status.textContent = "";
+});
+// submit word
+sub.addEventListener("click", function () {
+  if (winnertrue === false) {
+    let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
+    if (
+      cell[0].textContent === "" ||
+      cell[1].textContent === "" ||
+      cell[2].textContent === "" ||
+      cell[3].textContent === "" ||
+      cell[4].textContent === ""
+    ) {
+      lowletter();
+    } else {
+      checkword();
+    }
+  }
+});
+
+// keyboard keys --ok
+key.forEach((item) => {
+  item.addEventListener("click", function () {
+    if (winnertrue === false) {
+      if (status.classList.contains("greentext") === false) {
+        let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
+        if (activecell < 5 && cell[activecell].textContent === "") {
+          cell[activecell].textContent = item.textContent;
+          activecell++;
+          cellcombine =
+            cell[0].textContent +
+            cell[1].textContent +
+            cell[2].textContent +
+            cell[3].textContent +
+            cell[4].textContent;
+        }
+      }
+      status.textContent = "";
+    }
   });
+});
+// close info page --ok
+closeinfo.addEventListener("click", function () {
+  infopage.classList.add("hidden");
+  overlay.classList.add("hidden");
 });
