@@ -73,18 +73,18 @@ function checkword() {
       activecell = 0;
     }
   } else {
-    status.textContent = `.این کلمه در دیتابیس موجود نمی‌باشد`;
+    status.textContent = `این کلمه در دیتابیس موجود نمی‌باشد.`;
   }
 }
 // winning fucntion
 function won() {
-  status.textContent = "!شما برنده شدید";
+  status.textContent = "شما برنده شدید!";
   status.classList.add("greentext");
 }
 // Low letters function
 function lowletter() {
   const status = document.querySelector(".status");
-  status.textContent = ".تعداد حروف کافی نمی‌باشد";
+  status.textContent = "تعداد حروف کافی نمی‌باشد.";
   status.classList.add("redtext");
 }
 
