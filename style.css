@@ -52,8 +52,8 @@ header {
   justify-content: center;
 }
 .kpad {
-  padding: 7px 3px;
-  margin: 2px;
+  padding: 1vh 1.4vw;
+  margin: 0.3vh 0.4vw;
 }
 .guess {
   display: flex;
