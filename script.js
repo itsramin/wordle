@@ -179,10 +179,15 @@ newgame.addEventListener("click", function () {
       eachcell.classList.remove("gray");
       eachcell.textContent = "";
     }
+
     winnertrue = false;
     activecell = 0;
     rownum = 0;
     cellcombine = "";
+    let focusrow = document.querySelectorAll(`${activerow[rownum]}>.cell`);
+    focusrow.forEach((item) => {
+      item.style.borderColor = "#79b8e1";
+    });
     status.classList.remove("greentext");
     status.textContent = "";
   } else {

@@ -108,7 +108,7 @@ header {
 .green {
   background-color: rgb(176, 247, 155);
   color: #1b7912;
-  border: 2px solid #1b7912;
+  border: 2px solid #1b7912 !important;
 }
 .yellow {
   background-color: rgb(247, 238, 155);
