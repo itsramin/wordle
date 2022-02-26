@@ -177,6 +177,7 @@ newgame.addEventListener("click", function () {
       eachcell.classList.remove("green");
       eachcell.classList.remove("yellow");
       eachcell.classList.remove("gray");
+      eachcell.style.borderColor = "#d8d8d8";
       eachcell.textContent = "";
     }
 
