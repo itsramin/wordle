@@ -146,7 +146,7 @@ function setCookie(cname, cvalue, exdays) {
 
 // check cookies on page load
 window.addEventListener("load", function () {
-  checkCookie;
+  setTimeout(checkCookie, 5);
   let focusrow = document.querySelectorAll(`${activerow[rownum]}>.cell`);
   focusrow.forEach((item) => {
     item.style.borderColor = "#79b8e1";
