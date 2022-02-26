@@ -1,6 +1,6 @@
 import wordlist from "./words.js";
-
-let word = wordlist[Math.floor(Math.random() * wordlist.length)];
+let wordset = [...wordlist];
+let word = wordset[Math.floor(Math.random() * wordset.length)];
 let wordch = word.split("");
 let winnertrue = false;
 let cellcombine = "";
@@ -104,21 +104,26 @@ del.addEventListener("click", function () {
 });
 // Start new game
 newgame.addEventListener("click", function () {
-  word = wordlist[Math.floor(Math.random() * wordlist.length)];
-  wordch = word.split("");
-  let cells = document.querySelectorAll(".cell");
-  for (let kkk of cells) {
-    kkk.classList.remove("green");
-    kkk.classList.remove("yellow");
-    kkk.classList.remove("gray");
-    kkk.textContent = "";
+  wordset.splice(wordset.indexOf(word), 1);
+  if (wordset.length !== 0) {
+    word = wordset[Math.floor(Math.random() * wordset.length)];
+    wordch = word.split("");
+    let cells = document.querySelectorAll(".cell");
+    for (let eachcell of cells) {
+      eachcell.classList.remove("green");
+      eachcell.classList.remove("yellow");
+      eachcell.classList.remove("gray");
+      eachcell.textContent = "";
+    }
+    winnertrue = false;
+    activecell = 0;
+    rownum = 0;
+    cellcombine = "";
+    status.classList.remove("greentext");
+    status.textContent = "";
+  } else {
+    status.textContent = "لغات به اتمام رسید.";
   }
-  winnertrue = false;
-  activecell = 0;
-  rownum = 0;
-  cellcombine = "";
-  status.classList.remove("greentext");
-  status.textContent = "";
 });
 // submit word
 sub.addEventListener("click", function () {
