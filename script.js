@@ -14,7 +14,7 @@ const info = document.querySelector(".info");
 const overlay = document.querySelector(".overlay");
 const closeinfo = document.querySelector(".closeinfo");
 const infopage = document.querySelector(".infopage");
-const activerow = [".row1", ".row2", ".row3", ".row4", ".row5"];
+const activerow = [".row1", ".row2", ".row3", ".row4", ".row5", ".row6"];
 const status = document.querySelector(".status");
 const wons = document.querySelector(".wons");
 const losts = document.querySelector(".losts");
@@ -67,14 +67,29 @@ function checkword() {
       winnertrue = true;
       setTimeout(won, 10);
     } else {
+      // changing current rows border to initial
+      let focusrow = document.querySelectorAll(`${activerow[rownum]}>.cell`);
+      focusrow.forEach((item) => {
+        item.style.borderColor = "initial";
+      });
+
+      // go to next row and change activecell to 0
       rownum++;
-      if (rownum === 5) {
+      activecell = 0;
+
+      // changing current rows border to initial
+      focusrow = document.querySelectorAll(`${activerow[rownum]}>.cell`);
+      focusrow.forEach((item) => {
+        item.style.borderColor = "#79b8e1";
+      });
+
+      // check if user loss the game
+      if (rownum === 6) {
         status.textContent = `کلمه مورد نظر ${word} بود.`;
         losts.textContent = Number(losts.textContent) + 1;
         setCookie("lostsNum", Number(losts.textContent), 30);
         winnertrue = true;
       }
-      activecell = 0;
     }
   } else {
     status.textContent = `این کلمه در دیتابیس موجود نمی‌باشد.`;
@@ -130,7 +145,13 @@ function setCookie(cname, cvalue, exdays) {
 }
 
 // check cookies on page load
-window.addEventListener("load", checkCookie);
+window.addEventListener("load", function () {
+  checkCookie;
+  let focusrow = document.querySelectorAll(`${activerow[rownum]}>.cell`);
+  focusrow.forEach((item) => {
+    item.style.borderColor = "#79b8e1";
+  });
+});
 // showing information
 info.addEventListener("click", function () {
   infopage.classList.remove("hidden");
