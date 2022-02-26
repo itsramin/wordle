@@ -1,4 +1,4 @@
-import wordlist from "./words.js";
+import wordlist from "./words2.js";
 let wordset = [...wordlist];
 let word = wordset[Math.floor(Math.random() * wordset.length)];
 let wordch = word.split("");
