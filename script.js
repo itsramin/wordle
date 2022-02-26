@@ -16,6 +16,8 @@ const closeinfo = document.querySelector(".closeinfo");
 const infopage = document.querySelector(".infopage");
 const activerow = [".row1", ".row2", ".row3", ".row4", ".row5"];
 const status = document.querySelector(".status");
+const wons = document.querySelector(".wons");
+const losts = document.querySelector(".losts");
 
 // checking the word is correct or not
 function checkword() {
@@ -68,6 +70,8 @@ function checkword() {
       rownum++;
       if (rownum === 5) {
         status.textContent = `کلمه مورد نظر ${word} بود.`;
+        losts.textContent = Number(losts.textContent) + 1;
+        setCookie("lostsNum", Number(losts.textContent), 30);
         winnertrue = true;
       }
       activecell = 0;
@@ -80,6 +84,8 @@ function checkword() {
 function won() {
   status.textContent = "شما برنده شدید!";
   status.classList.add("greentext");
+  wons.textContent = Number(wons.textContent) + 1;
+  setCookie("wonsNum", Number(wons.textContent), 30);
 }
 // Low letters function
 function lowletter() {
@@ -87,7 +93,44 @@ function lowletter() {
   status.textContent = "تعداد حروف کافی نمی‌باشد.";
   status.classList.add("redtext");
 }
+// check cookie is available
+function checkCookie() {
+  let num_wons = getCookie("wonsNum");
+  let num_losts = getCookie("lostsNum");
+  if (num_wons != "") {
+    wons.textContent = num_wons;
+    losts.textContent = num_losts || 0;
+  } else {
+    wons.textContent = 0;
+    losts.textContent = 0;
+  }
+}
+// get cookies number
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+// set cookies
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
 
+// check cookies on page load
+window.addEventListener("load", checkCookie);
 // showing information
 info.addEventListener("click", function () {
   infopage.classList.remove("hidden");

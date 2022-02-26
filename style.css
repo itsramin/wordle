@@ -18,12 +18,14 @@ header {
   width: 13rem;
   color: white;
   text-align: center;
-  height: 4rem;
+  height: 4.5rem;
   border-radius: 15px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
+  justify-content: space-around;
+  font-size: 1.2rem;
 }
 .box {
   margin: 0px auto;
@@ -185,6 +187,16 @@ header {
 }
 .infopage p {
   line-height: 1.8rem;
+}
+.scores {
+  font-size: 0.9rem;
+  font-weight: 200;
+  display: flex;
+  gap: 1rem;
+}
+.wons,
+.losts {
+  margin: 0 0.1rem;
 }
 @media screen and (min-width: 800px) {
   .kpad {
