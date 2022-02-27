@@ -1,5 +1,10 @@
 import wordlist from "./words2.js";
-let wordset = [...wordlist];
+import wordlist3 from "./words3.js";
+let wordset =
+  getCookie("wonsNum") !== ""
+    ? [...getCookie("wordset").split(",")]
+    : [...wordlist];
+
 let word = wordset[Math.floor(Math.random() * wordset.length)];
 let wordch = word.split("");
 let winnertrue = false;
@@ -18,6 +23,10 @@ const activerow = [".row1", ".row2", ".row3", ".row4", ".row5", ".row6"];
 const status = document.querySelector(".status");
 const wons = document.querySelector(".wons");
 const losts = document.querySelector(".losts");
+const setting = document.querySelector(".setting");
+const settingpage = document.querySelector(".settingpage");
+const deletescores = document.querySelector(".deletescores");
+const closesetting = document.querySelector(".closesetting");
 
 // checking the word is correct or not
 function checkword() {
@@ -92,7 +101,7 @@ function checkword() {
       }
     }
   } else {
-    status.textContent = `این کلمه در دیتابیس موجود نمی‌باشد.`;
+    status.textContent = `این کلمه وجود ندارد.`;
   }
 }
 // winning fucntion
@@ -101,6 +110,8 @@ function won() {
   status.classList.add("greentext");
   wons.textContent = Number(wons.textContent) + 1;
   setCookie("wonsNum", Number(wons.textContent), 30);
+  wordset.splice(wordset.indexOf(word), 1);
+  setCookie("wordset", wordset, 30);
 }
 // Low letters function
 function lowletter() {
@@ -112,6 +123,7 @@ function lowletter() {
 function checkCookie() {
   let num_wons = getCookie("wonsNum");
   let num_losts = getCookie("lostsNum");
+
   if (num_wons != "") {
     wons.textContent = num_wons;
     losts.textContent = num_losts || 0;
@@ -168,8 +180,7 @@ del.addEventListener("click", function () {
 });
 // Start new game
 newgame.addEventListener("click", function () {
-  wordset.splice(wordset.indexOf(word), 1);
-  if (wordset.length !== 0) {
+  if (wordset.length !== 1) {
     word = wordset[Math.floor(Math.random() * wordset.length)];
     wordch = word.split("");
     let cells = document.querySelectorAll(".cell");
@@ -215,7 +226,7 @@ sub.addEventListener("click", function () {
 // keyboard keys
 key.forEach((item) => {
   item.addEventListener("click", function () {
-    if (winnertrue === false) {
+    if (winnertrue === false && wordset.length !== 1) {
       if (status.classList.contains("greentext") === false) {
         let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
         if (activecell < 5 && cell[activecell].textContent === "") {
@@ -237,4 +248,23 @@ key.forEach((item) => {
 closeinfo.addEventListener("click", function () {
   infopage.classList.add("hidden");
   overlay.classList.add("hidden");
+});
+closesetting.addEventListener("click", function () {
+  settingpage.classList.add("hidden");
+  overlay.classList.add("hidden");
+});
+
+setting.addEventListener("click", function () {
+  settingpage.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+});
+deletescores.addEventListener("click", function () {
+  if (confirm("مطمئنی می‌خوای امتیازارو پاک کنی؟")) {
+    setCookie("wonsNum", 0, -10);
+    setCookie("lostsNum", 0, -10);
+    setCookie("wordset", 0, -10);
+    wons.textContent = 0;
+    losts.textContent = 0;
+    alert("امتیازها پاک شدند.");
+  }
 });

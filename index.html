@@ -3,6 +3,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
     <link rel="stylesheet" href="reset.css" />
     <link
       href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css"
@@ -10,7 +14,7 @@
       type="text/css"
     />
     <link rel="stylesheet" href="style.css" />
-    <script type="module" src="words.js" defer></script>
+    <script type="module" src="words2.js" defer></script>
     <script type="module" src="script.js" defer></script>
     <title>Wordle</title>
   </head>
@@ -112,14 +116,20 @@
             </div>
           </div>
           <div class="butts">
-            <button class="greenbutt sub">ثبت</button>
-            <button class="butt newgame">بازی جدید</button>
-            <button class="butt info">راهنما</button>
+            <button class="greenbutt sub">ثبت &#9989;</button>
+            <button class="butt newgame">بازی جدید 🔄</button>
+            <button class="icon info">
+              <i class="fa fa-info" aria-hidden="true"></i>
+            </button>
+            <button class="icon setting">
+              <i class="fa fa-cog"></i>
+            </button>
           </div>
         </div>
       </main>
     </div>
     <div class="infopage hidden">
+      <span class="pagetitle">راهنمای بازی</span>
       <button class="closeinfo">&times;</button>
       <p>
         کلمه مورد نظر اسم یه شهره. می‌تونی ۵ بار حدس بزنی. بعد از هر حدس رنگ هر
@@ -163,7 +173,19 @@
           یعنی کلا اون حرف وجود نداره.
         </li>
       </ul>
-      <!-- <img src="info.jpg" class="infoimg" /> -->
+    </div>
+    <div class="settingpage hidden">
+      <span class="pagetitle">تنظیمات</span>
+      <button class="closesetting">&times;</button>
+      <div class="optionbox">
+        <div class="optiontitle">موضوع کلمات</div>
+        <button class="optionbutt city">📌 شهرهای ایران</button>
+        <button class="optionbutt animal">🐈 حیوانات</button>
+      </div>
+      <div class="optionbox">
+        <div class="optiontitle">امتیازات</div>
+        <button class="optionbutt deletescores">🚮 امتیازهامو پاک کن</button>
+      </div>
     </div>
     <div class="overlay hidden"></div>
   </body>
