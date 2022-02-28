@@ -1,4 +1,4 @@
-const animals = [
+const wordlist2 = [
   "پرستو",
   "تمساح",
   "حلزون",
@@ -24,4 +24,4 @@ const animals = [
   "همستر",
 ];
 
-export default animals;
+export default wordlist2;

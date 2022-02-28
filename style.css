@@ -81,7 +81,10 @@ header {
   align-items: center;
 }
 .butts {
-  margin: 10px 0 30px;
+  margin: 16px 0 30px;
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
 }
 .butt,
 .greenbutt {
@@ -92,7 +95,6 @@ header {
   padding: 5px 14px;
   font-family: inherit;
   font-size: 20px;
-  margin: 6px 5px;
   cursor: pointer;
 }
 
@@ -210,14 +212,14 @@ ul {
   padding: 14px 14px;
   font-family: inherit;
   font-size: 15px;
-  margin: 6px 5px;
   cursor: pointer;
+  min-width: 3rem;
 }
 .settingpage {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 18rem;
+  width: 14rem;
   color: #333;
   background-color: #fff;
   transform: translate(-50%, -50%);
@@ -230,18 +232,18 @@ ul {
   line-height: 1.9rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
-.deletescores {
+/* .deletescores {
   font-family: inherit;
-  font-size: 1rem;
-  padding: 0.5rem 0.8rem;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.6rem;
   cursor: pointer;
   border-radius: 10px;
   color: #fff;
   border: none;
   background-color: #0d79c2;
-}
+} */
 .pagetitle {
   font-weight: bold;
   position: absolute;
@@ -267,12 +269,16 @@ ul {
   padding: 0.6rem 1rem 1rem;
   border-radius: 10px;
   margin-bottom: 1rem;
+  min-width: 80%;
 }
 .optiontitle {
+  width: auto;
   font-family: inherit;
   font-size: 1rem;
-  font-weight: normal;
-  margin-bottom: 0.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  padding: 0 0.5rem 0.3rem 0.5rem;
+  border-bottom: 1px solid #c4c4c4;
 }
 .option {
   font-family: inherit;
@@ -283,11 +289,25 @@ ul {
   color: #555;
   border: none;
   background-color: #dfdfdf;
-  margin-left: 0.5rem;
 }
 .optionselected {
   color: #fff;
   background-color: #0d79c2;
+}
+.optionchoices {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+.optionbox p {
+  margin-top: 0.3rem;
+  font-family: inherit;
+  font-weight: 200;
+  line-height: 1rem;
+  font-size: 0.7rem;
+  color: #666;
 }
 @media screen and (min-width: 800px) {
   .kpad {
@@ -303,5 +323,14 @@ ul {
     max-width: 35%;
     font-size: 1rem;
     padding: 3rem 2rem 2rem;
+  }
+  .settingpage {
+    width: 23rem;
+  }
+  .optionchoices {
+    flex-direction: row;
+  }
+  .butts {
+    gap: 0.6rem;
   }
 }
