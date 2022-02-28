@@ -1,10 +1,8 @@
-import cities from "./words2.js";
-import animals from "./words3.js";
-
+import wordlist from "./words3.js";
 let wordset =
   getCookie("wonsNum") !== ""
     ? [...getCookie("wordset").split(",")]
-    : [...cities];
+    : [...wordlist];
 
 let word = wordset[Math.floor(Math.random() * wordset.length)];
 let wordch = word.split("");
@@ -273,6 +271,7 @@ deletescores.addEventListener("click", function () {
     alert("امتیازها پاک شدند.");
   }
 });
+
 let xxx = 0;
 console.log(xxx);
 animal.addEventListener("click", function () {

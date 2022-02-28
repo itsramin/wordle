@@ -274,16 +274,20 @@ ul {
   font-weight: normal;
   margin-bottom: 0.5rem;
 }
-.optionbutt {
+.option {
   font-family: inherit;
   font-size: 0.9rem;
   padding: 0.2rem 0.6rem;
   cursor: pointer;
   border-radius: 10px;
-  color: #fff;
+  color: #555;
   border: none;
-  background-color: #0d79c2;
+  background-color: #dfdfdf;
   margin-left: 0.5rem;
+}
+.optionselected {
+  color: #fff;
+  background-color: #0d79c2;
 }
 @media screen and (min-width: 800px) {
   .kpad {

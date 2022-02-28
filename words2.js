@@ -1,4 +1,4 @@
-const wordlist = [
+const cities = [
   "اسالم",
   "اهواز",
   "ایلام",
@@ -45,4 +45,4 @@ const wordlist = [
   "یاسوج",
 ];
 
-export default wordlist;
+export default cities;
