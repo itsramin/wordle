@@ -31,6 +31,7 @@ const city = document.querySelector(".city");
 const animal = document.querySelector(".animal");
 const fruit = document.querySelector(".fruit");
 const option = document.querySelectorAll(".option");
+const subject = document.querySelector(".subject");
 
 // checking the word is correct or not
 function checkword() {
@@ -318,7 +319,7 @@ animal.addEventListener("click", function () {
     wons.textContent = 0;
     losts.textContent = 0;
   }
-
+  subject.innerHTML = "حیوانات";
   wordset = [...wordlist3];
   word = wordset[Math.floor(Math.random() * wordset.length)];
   resetcells();
@@ -339,6 +340,7 @@ city.addEventListener("click", function () {
     wons.textContent = 0;
     losts.textContent = 0;
   }
+  subject.innerHTML = "شهرهای ایران";
   wordset = [...wordlist2];
   word = wordset[Math.floor(Math.random() * wordset.length)];
   resetcells();
@@ -359,6 +361,7 @@ fruit.addEventListener("click", function () {
     wons.textContent = 0;
     losts.textContent = 0;
   }
+  subject.innerHTML = "میوه‌ها";
   wordset = [...wordlist];
   word = wordset[Math.floor(Math.random() * wordset.length)];
   resetcells();
