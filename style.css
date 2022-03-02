@@ -70,7 +70,8 @@ header {
   flex-direction: column;
 }
 .row {
-  padding-top: 10px;
+  padding: 5px 5px;
+  border-radius: 5px;
   display: flex;
   gap: 0.5rem;
   margin: 0 auto;
@@ -249,16 +250,6 @@ ul {
   flex-direction: column;
   align-items: center;
 }
-/* .deletescores {
-  font-family: inherit;
-  font-size: 0.9rem;
-  padding: 0.2rem 0.6rem;
-  cursor: pointer;
-  border-radius: 10px;
-  color: #fff;
-  border: none;
-  background-color: #0d79c2;
-} */
 .pagetitle {
   font-weight: bold;
   position: absolute;
@@ -340,7 +331,7 @@ ul {
     padding: 3rem 2rem 2rem;
   }
   .settingpage {
-    width: 23rem;
+    width: 31rem;
   }
   .optionchoices {
     flex-direction: row;
