@@ -1,16 +1,7 @@
-import wordlist from "./words.js";
-import wordlist2 from "./words2.js";
-import wordlist3 from "./words3.js";
+import fruitlist from "./fruits.js";
+import citylist from "./cities.js";
+import animallist from "./animals.js";
 
-var wordset =
-  getCookie("wonsNumCity") !== ""
-    ? [...getCookie("wordsetcity").split(",")]
-    : [...wordlist2];
-var word = wordset[Math.floor(Math.random() * wordset.length)];
-var wordch = word.split("");
-var winnertrue = false;
-var activecell = 0;
-var rownum = 0;
 const key = document.querySelectorAll(".key:not(.del)");
 const del = document.querySelector(".del");
 const newgame = document.querySelector(".newgame");
@@ -32,7 +23,38 @@ const animal = document.querySelector(".animal");
 const fruit = document.querySelector(".fruit");
 const option = document.querySelectorAll(".option");
 const subject = document.querySelector(".subject");
+const guess = document.querySelector(".guess");
 
+var wordset =
+  getCookie("wonsNumCity") !== ""
+    ? [...getCookie("wordsetCity").split(",")]
+    : [...citylist];
+var word = wordset[Math.floor(Math.random() * wordset.length)];
+var winnertrue = false;
+var activecell = 0;
+var rownum = 0;
+addcell();
+
+// add cells depends on word lenght
+function addcell() {
+  guess.innerHTML = "";
+  let cellhtml = "";
+  let rowhtml = "";
+  for (let i = 0; i < word.length; i++) {
+    cellhtml = cellhtml + `<div class="cell"></div>`;
+  }
+  for (let j = 1; j < 7; j++) {
+    rowhtml =
+      rowhtml +
+      `
+    <div class="row row${j}">
+    ${cellhtml}
+    </div>
+  `;
+  }
+
+  guess.insertAdjacentHTML("afterbegin", rowhtml);
+}
 // checking the word is correct or not
 function checkword() {
   let wordch = word.split("");
@@ -70,13 +92,15 @@ function checkword() {
       cells[otherch].classList.add("gray");
     }
   }
-  if (
-    cells[0].classList.contains("green") &&
-    cells[1].classList.contains("green") &&
-    cells[2].classList.contains("green") &&
-    cells[3].classList.contains("green") &&
-    cells[4].classList.contains("green")
-  ) {
+  let wordistrue = true;
+  for (let v = 0; v < word.length; v++) {
+    if (cells[v].classList.contains("green")) {
+      wordistrue = wordistrue && true;
+    } else {
+      wordistrue = wordistrue && false;
+    }
+  }
+  if (wordistrue === true) {
     winnertrue = true;
     setTimeout(won, 10);
   } else {
@@ -180,8 +204,9 @@ function setCookie(cname, cvalue, exdays) {
 function newGame() {
   if (wordset.length !== 1) {
     word = wordset[Math.floor(Math.random() * wordset.length)];
-    wordch = word.split("");
+    var wordch = word.split("");
     resetcells();
+    addcell();
   } else {
     status.textContent = "لغات به اتمام رسید.";
   }
@@ -236,13 +261,23 @@ newgame.addEventListener("click", newGame);
 // submit word
 sub.addEventListener("click", function () {
   if (winnertrue === false) {
+    let cellisfull = true;
     let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
+    for (let v = 0; v < word.length; v++) {
+      if (cell[v].textContent !== "") {
+        cellisfull = cellisfull && true;
+      } else {
+        cellisfull = cellisfull && false;
+      }
+    }
     if (
-      cell[0].textContent === "" ||
-      cell[1].textContent === "" ||
-      cell[2].textContent === "" ||
-      cell[3].textContent === "" ||
-      cell[4].textContent === ""
+      cellisfull === false
+
+      // cell[0].textContent === "" ||
+      // cell[1].textContent === "" ||
+      // cell[2].textContent === "" ||
+      // cell[3].textContent === "" ||
+      // cell[4].textContent === ""
     ) {
       lowletter();
     } else {
@@ -256,7 +291,7 @@ key.forEach((item) => {
     if (winnertrue === false && wordset.length !== 1) {
       if (status.classList.contains("greentext") === false) {
         let cell = document.querySelectorAll(`${activerow[rownum]}>.cell`);
-        if (activecell < 5 && cell[activecell].textContent === "") {
+        if (activecell < word.length && cell[activecell].textContent === "") {
           cell[activecell].textContent = item.textContent;
 
           activecell++;
@@ -320,9 +355,10 @@ animal.addEventListener("click", function () {
     losts.textContent = 0;
   }
   subject.innerHTML = "حیوانات";
-  wordset = [...wordlist3];
+  wordset = [...animallist];
   word = wordset[Math.floor(Math.random() * wordset.length)];
   resetcells();
+  addcell();
 });
 // select city list
 city.addEventListener("click", function () {
@@ -341,9 +377,10 @@ city.addEventListener("click", function () {
     losts.textContent = 0;
   }
   subject.innerHTML = "شهرهای ایران";
-  wordset = [...wordlist2];
+  wordset = [...citylist];
   word = wordset[Math.floor(Math.random() * wordset.length)];
   resetcells();
+  addcell();
 });
 // select fruit list
 fruit.addEventListener("click", function () {
@@ -362,7 +399,8 @@ fruit.addEventListener("click", function () {
     losts.textContent = 0;
   }
   subject.innerHTML = "میوه‌ها";
-  wordset = [...wordlist];
+  wordset = [...fruitlist];
   word = wordset[Math.floor(Math.random() * wordset.length)];
   resetcells();
+  addcell();
 });

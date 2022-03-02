@@ -1,3 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+.fa,
+.fas {
+  vertical-align: middle;
+}
 body {
   font-family: "Vazir", Tahoma, Verdana, "Times New Roman";
   user-select: none;
@@ -65,7 +72,7 @@ header {
 .row {
   padding-top: 10px;
   display: flex;
-  gap: 3px;
+  gap: 0.5rem;
   margin: 0 auto;
   flex-direction: row-reverse;
 }
@@ -107,21 +114,28 @@ header {
 .del {
   background-color: rgb(255, 228, 223);
   color: tomato;
+  font-size: 0.9rem !important;
 }
 .green {
   background-color: #b0f79b;
   color: #1b7912;
-  border: 2px solid #1b7912 !important;
+  border: none !important;
+  box-shadow: 0px 0px 7px#b0f79b;
+  /* border: 2px solid #1b7912 !important; */
 }
 .yellow {
-  background-color: #f7ee9b;
+  background-color: #fff989;
   color: #695f00;
-  border: 2px solid #695f00;
+  border: none !important;
+  box-shadow: 0px 0px 7px#fff989;
+  /* border: 2px solid #695f00; */
 }
 .gray {
   background-color: #e9e9e9;
   color: #555;
-  border: 2px solid #818181;
+  border: none !important;
+  box-shadow: 0px 0px 7px#e9e9e9;
+  /* border: 2px solid #818181; */
 }
 .status {
   margin: 20px 0 10px;
@@ -317,7 +331,7 @@ ul {
   }
   .key {
     font-size: 1.2rem;
-    min-width: 1.5rem;
+    min-width: 2.3rem;
   }
   .infopage {
     line-height: 1.9rem;
