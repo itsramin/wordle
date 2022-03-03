@@ -53,7 +53,7 @@ header {
   font-size: 0.9rem;
   background-color: #f5f5f5;
   color: #424242;
-  min-width: 1rem;
+  min-width: 1.6rem;
   border-radius: 5px;
   cursor: pointer;
   align-items: center;
@@ -62,7 +62,7 @@ header {
 }
 .kpad {
   padding: 1vh 1.8vw;
-  margin: 0.2vh 0.4vw;
+  margin: 0.4vh 0.5vw;
 }
 .guess {
   padding-top: 1rem;
@@ -116,6 +116,7 @@ header {
   background-color: rgb(255, 228, 223);
   color: tomato;
   font-size: 0.9rem !important;
+  flex-grow: 2;
 }
 .green {
   background-color: #b0f79b;
@@ -248,7 +249,7 @@ ul {
   line-height: 1.9rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 .pagetitle {
   font-weight: bold;
@@ -275,7 +276,7 @@ ul {
   padding: 0.6rem 1rem 1rem;
   border-radius: 10px;
   margin-bottom: 1rem;
-  min-width: 80%;
+  width: 100%;
 }
 .optiontitle {
   width: auto;
