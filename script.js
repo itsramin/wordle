@@ -30,6 +30,7 @@ var wordset =
     ? [...getCookie("wordsetCity").split(",")]
     : [...citylist];
 var word = wordset[Math.floor(Math.random() * wordset.length)];
+let wordch;
 var winnertrue = false;
 var activecell = 0;
 var rownum = 0;
@@ -59,48 +60,25 @@ function addcell() {
 function checkword() {
   let wordch = word.split("");
   let cells = document.querySelectorAll(`${activerow[rownum]}>.cell`);
-  for (let ch = 0; ch < cells.length; ch++) {
-    if (wordch[ch] === cells[ch].textContent) {
-      cells[ch].classList.add("green");
-      wordch[ch] = "x";
+  cells.forEach((cell, i) => {
+    if (wordch[i] === cell.textContent) {
+      cell.classList.add("green");
+      wordch[i] = "x";
     }
-  }
-  for (let otherch = 0; otherch < cells.length; otherch++) {
-    if (wordch[otherch] === "x") {
-      continue;
-    } else if (cells[otherch].textContent === wordch[0]) {
-      cells[otherch].classList.add("yellow");
-      wordch[0] = "y";
-      continue;
-    } else if (cells[otherch].textContent === wordch[1]) {
-      cells[otherch].classList.add("yellow");
-      wordch[1] = "y";
-      continue;
-    } else if (cells[otherch].textContent === wordch[2]) {
-      cells[otherch].classList.add("yellow");
-      wordch[2] = "y";
-      continue;
-    } else if (cells[otherch].textContent === wordch[3]) {
-      cells[otherch].classList.add("yellow");
-      wordch[3] = "y";
-      continue;
-    } else if (cells[otherch].textContent === wordch[4]) {
-      cells[otherch].classList.add("yellow");
-      wordch[4] = "y";
-      continue;
-    } else {
-      cells[otherch].classList.add("gray");
+  });
+  console.log(wordch);
+  cells.forEach((cell, i) => {
+    if (wordch.includes(cell.textContent)) {
+      wordch[wordch.findIndex((ch) => ch === cell.textContent)] = "y";
+      cell.classList.add("yellow");
+    } else if (wordch[i] !== "x") {
+      cell.classList.add("gray");
     }
-  }
-  let wordistrue = true;
-  for (let v = 0; v < word.length; v++) {
-    if (cells[v].classList.contains("green")) {
-      wordistrue = wordistrue && true;
-    } else {
-      wordistrue = wordistrue && false;
-    }
-  }
-  if (wordistrue === true) {
+  });
+  console.log(wordch);
+  let cellsArray = Array.from(cells);
+
+  if (cellsArray.every((cell) => cell.classList.contains("green"))) {
     winnertrue = true;
     setTimeout(won, 10);
   } else {
