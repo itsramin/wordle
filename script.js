@@ -66,7 +66,6 @@ function checkword() {
       wordch[i] = "x";
     }
   });
-  console.log(wordch);
   cells.forEach((cell, i) => {
     if (wordch.includes(cell.textContent)) {
       wordch[wordch.findIndex((ch) => ch === cell.textContent)] = "y";
@@ -75,9 +74,7 @@ function checkword() {
       cell.classList.add("gray");
     }
   });
-  console.log(wordch);
   let cellsArray = Array.from(cells);
-
   if (cellsArray.every((cell) => cell.classList.contains("green"))) {
     winnertrue = true;
     setTimeout(won, 10);
