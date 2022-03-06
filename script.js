@@ -66,8 +66,12 @@ function checkword() {
       wordch[i] = "x";
     }
   });
+  console.log(wordch);
   cells.forEach((cell, i) => {
-    if (wordch.includes(cell.textContent)) {
+    if (
+      wordch.includes(cell.textContent) &&
+      !cell.classList.contains("green")
+    ) {
       wordch[wordch.findIndex((ch) => ch === cell.textContent)] = "y";
       cell.classList.add("yellow");
     } else if (wordch[i] !== "x") {
