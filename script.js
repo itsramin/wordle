@@ -205,7 +205,6 @@ function resetcells() {
   activecell = 0;
   rownum = 0;
   let focusrow = document.querySelectorAll(`${activerow[rownum]}>.cell`);
-  console.log(focusrow);
   focusrow.forEach((item) => {
     item.style.borderColor = "#79b8e1";
   });
