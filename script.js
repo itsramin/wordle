@@ -2,7 +2,7 @@ import fruitlist from "./fruits.js";
 import citylist from "./cities.js";
 import animallist from "./animals.js";
 
-const key = document.querySelectorAll(".key:not(.del)");
+const keys = document.querySelectorAll(".key:not(.del)");
 const del = document.querySelector(".del");
 const newgame = document.querySelector(".newgame");
 const sub = document.querySelector(".sub");
@@ -62,20 +62,39 @@ function checkword() {
   let cells = document.querySelectorAll(`${activerow[rownum]}>.cell`);
   cells.forEach((cell, i) => {
     if (wordch[i] === cell.textContent) {
+      keys.forEach((key) => {
+        if (key.dataset.ch === wordch[i]) {
+          key.classList.remove("yellow");
+          key.classList.add("green");
+        }
+      });
       cell.classList.add("green");
       wordch[i] = "x";
     }
   });
-  console.log(wordch);
   cells.forEach((cell, i) => {
     if (
       wordch.includes(cell.textContent) &&
       !cell.classList.contains("green")
     ) {
-      wordch[wordch.findIndex((ch) => ch === cell.textContent)] = "y";
+      const chOfWordch = wordch.findIndex((ch) => ch === cell.textContent);
+      keys.forEach((key) => {
+        if (
+          key.dataset.ch === wordch[chOfWordch] &&
+          !key.classList.contains("green")
+        ) {
+          key.classList.add("yellow");
+        }
+      });
+      wordch[chOfWordch] = "y";
       cell.classList.add("yellow");
     } else if (wordch[i] !== "x") {
       cell.classList.add("gray");
+      keys.forEach((key) => {
+        if (key.dataset.ch === cell.textContent) {
+          key.classList.add("gray");
+        }
+      });
     }
   });
   let cellsArray = Array.from(cells);
@@ -184,6 +203,11 @@ function newGame() {
   if (wordset.length !== 1) {
     word = wordset[Math.floor(Math.random() * wordset.length)];
     var wordch = word.split("");
+    keys.forEach((key) => {
+      key.classList.remove("green");
+      key.classList.remove("yellow");
+      key.classList.remove("gray");
+    });
     addcell();
     resetcells();
   } else {
@@ -265,7 +289,7 @@ sub.addEventListener("click", function () {
   }
 });
 // keyboard keys
-key.forEach((item) => {
+keys.forEach((item) => {
   item.addEventListener("click", function () {
     if (winnertrue === false && wordset.length !== 1) {
       if (status.classList.contains("greentext") === false) {
