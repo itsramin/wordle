@@ -184,8 +184,8 @@ function newGame() {
   if (wordset.length !== 1) {
     word = wordset[Math.floor(Math.random() * wordset.length)];
     var wordch = word.split("");
-    resetcells();
     addcell();
+    resetcells();
   } else {
     status.textContent = "لغات به اتمام رسید.";
   }
@@ -205,6 +205,7 @@ function resetcells() {
   activecell = 0;
   rownum = 0;
   let focusrow = document.querySelectorAll(`${activerow[rownum]}>.cell`);
+  console.log(focusrow);
   focusrow.forEach((item) => {
     item.style.borderColor = "#79b8e1";
   });
