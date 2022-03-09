@@ -71,14 +71,15 @@ header {
   flex-direction: column;
 }
 .row {
-  padding: 5px 5px;
+  /* gap: 0.5rem;
+  padding: 5px 5px; */
   border-radius: 5px;
   display: flex;
-  gap: 0.5rem;
   margin: 0 auto;
   flex-direction: row-reverse;
 }
 .cell {
+  margin: 3px 2px;
   border: 2px solid #d8d8d8;
   width: 40px;
   height: 40px;
@@ -92,7 +93,7 @@ header {
 .butts {
   margin: 16px 0 30px;
   display: flex;
-  gap: 0.3rem;
+  /* gap: 0.3rem; */
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -105,6 +106,7 @@ header {
   padding: 5px 14px;
   font-family: inherit;
   font-size: 20px;
+  margin: 3px 5px;
   cursor: pointer;
 }
 
@@ -232,6 +234,7 @@ ul {
   font-size: 15px;
   cursor: pointer;
   min-width: 3rem;
+  margin: 3px 5px;
 }
 .settingpage {
   position: absolute;
@@ -339,6 +342,6 @@ ul {
     flex-direction: row;
   }
   .butts {
-    gap: 0.6rem;
+    /* gap: 0.6rem; */
   }
 }
