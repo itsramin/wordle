@@ -360,8 +360,8 @@ animal.addEventListener("click", function () {
   subject.innerHTML = "حیوانات";
   wordset = [...animallist];
   word = wordset[Math.floor(Math.random() * wordset.length)];
-  resetcells();
   addcell();
+  resetcells();
 });
 // select city list
 city.addEventListener("click", function () {
@@ -382,8 +382,8 @@ city.addEventListener("click", function () {
   subject.innerHTML = "شهرهای ایران";
   wordset = [...citylist];
   word = wordset[Math.floor(Math.random() * wordset.length)];
-  resetcells();
   addcell();
+  resetcells();
 });
 // select fruit list
 fruit.addEventListener("click", function () {
@@ -404,6 +404,6 @@ fruit.addEventListener("click", function () {
   subject.innerHTML = "میوه‌ها";
   wordset = [...fruitlist];
   word = wordset[Math.floor(Math.random() * wordset.length)];
-  resetcells();
   addcell();
+  resetcells();
 });
