@@ -203,11 +203,7 @@ function newGame() {
   if (wordset.length !== 1) {
     word = wordset[Math.floor(Math.random() * wordset.length)];
     var wordch = word.split("");
-    keys.forEach((key) => {
-      key.classList.remove("green");
-      key.classList.remove("yellow");
-      key.classList.remove("gray");
-    });
+    cleanKeyboard();
     addcell();
     resetcells();
   } else {
@@ -234,6 +230,14 @@ function resetcells() {
   });
   status.classList.remove("greentext");
   status.textContent = "";
+}
+
+function cleanKeyboard() {
+  keys.forEach((key) => {
+    key.classList.remove("green");
+    key.classList.remove("yellow");
+    key.classList.remove("gray");
+  });
 }
 
 // check cookies on page load
@@ -362,6 +366,7 @@ animal.addEventListener("click", function () {
   word = wordset[Math.floor(Math.random() * wordset.length)];
   addcell();
   resetcells();
+  cleanKeyboard();
 });
 // select city list
 city.addEventListener("click", function () {
@@ -384,6 +389,7 @@ city.addEventListener("click", function () {
   word = wordset[Math.floor(Math.random() * wordset.length)];
   addcell();
   resetcells();
+  cleanKeyboard();
 });
 // select fruit list
 fruit.addEventListener("click", function () {
@@ -406,4 +412,5 @@ fruit.addEventListener("click", function () {
   word = wordset[Math.floor(Math.random() * wordset.length)];
   addcell();
   resetcells();
+  cleanKeyboard();
 });
