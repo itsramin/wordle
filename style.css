@@ -21,6 +21,7 @@ body {
 header {
   font-weight: bold;
   background-color: #0d79c2;
+
   margin: 20px auto 0;
   width: 16rem;
   color: white;
@@ -91,10 +92,10 @@ header {
   align-items: center;
 }
 .butts {
-  margin: 16px 0 30px;
+  margin: 15px auto;
   display: flex;
-  /* gap: 0.3rem; */
-  justify-content: center;
+  width: 20rem;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 .butt,
@@ -105,8 +106,8 @@ header {
   color: #005e9c;
   padding: 5px 14px;
   font-family: inherit;
-  font-size: 20px;
-  margin: 3px 5px;
+  font-size: 1rem;
+  /* margin: 3px 5px; */
   cursor: pointer;
 }
 
@@ -209,13 +210,14 @@ header {
 }
 .infopage p {
   margin-top: 1rem;
-  line-height: 1.8rem;
+  line-height: 1.5rem;
 }
 .scores {
   font-size: 0.9rem;
   font-weight: 200;
   display: flex;
-  gap: 1rem;
+  width: 90%;
+  justify-content: space-around;
 }
 .wons,
 .losts {
@@ -234,7 +236,7 @@ ul {
   font-size: 15px;
   cursor: pointer;
   min-width: 3rem;
-  margin: 3px 5px;
+  /* margin: 3px 5px; */
 }
 .settingpage {
   position: absolute;
@@ -342,6 +344,14 @@ ul {
     flex-direction: row;
   }
   .butts {
-    /* gap: 0.6rem; */
+    width: 24rem;
+  }
+  .butt,
+  .greenbutt {
+    font-size: 1.3rem;
+  }
+  .infopage p {
+    margin-top: 1rem;
+    line-height: 1.8rem;
   }
 }
